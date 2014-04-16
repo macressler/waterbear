@@ -6162,12 +6162,12 @@ wb.menu({
         {
             "blocktype": "expression",
             "id": "102ce9b4-ae29-4bd5-9bbc-effbbd3a177a",
-            "script": "(if (equals? (cdr {{1}}) ()) (car {{1}}) (cadr {{1}}))",
+            "script": "(if (equals? (cdr {{1}}) ()) \\n(car {{1}}) (cadr {{1}}))",
             "type": "tree",
             "help": "get the data of ",
             "sockets": [
                 {
-                    "name": "right subtree of",
+                    "name": "get data of",
                     "type": "tree"
                 }
             ]
