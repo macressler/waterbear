@@ -36,6 +36,20 @@
                 }
             ]
         },
+	{
+            "blocktype": "expression",
+            "id": "e1951d04-dc2f-459e-9d7a-4796f29169ea",
+            "type": "string",
+            "script": "(fold_left (lambda (x y) (string-append x (string y))) \"\" {{1}})",
+            "help": "returns a string made from the list of characters ",
+            "sockets": [
+                {
+                    "name": "string from list",
+                    "type": "list",
+                    "value": "()"
+                }
+            ]
+        },
         {
             "blocktype": "expression",
             "id": "3889BB61-FC62-4BED-B0EC-792AF636EC18",
@@ -53,7 +67,7 @@
         {
             "blocktype": "expression",
             "id": "6BA0B0CF-6F22-4384-8A16-630C745FA3D3",
-            "script": "(make-string (string-ref {{1}} {{2}}))",
+            "script": "(make-string 1 (string-ref {{1}} {{2}}))",
             "type": "string",
             "help": "Return a string of length 1 from the character at the specified index of the specified string.",
             "sockets": [
