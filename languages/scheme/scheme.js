@@ -21,11 +21,11 @@
         var run = function(){
             wb.script = script;
             var scriptArray = script.split(";;end");
-            /*var cssLink = document.createElement("link");
+            var cssLink = document.createElement("link");
             cssLink.href = "/stylesheets/scheme_repl.css"; 
             cssLink.rel = "stylesheet"; 
             cssLink.type = "text/css"; 
-            document.querySelector('.stageframe').contentWindow.document.appendChild(cssLink);*/
+            document.querySelector('.stageframe').contentWindow.document.body.appendChild(cssLink);
             document.querySelector('.stageframe').contentWindow.document.body.innerHTML = '';  
             for(var i = 0; i < scriptArray.length; i++) {
                 console.log('THIS IS IMPORTANT:' + scriptArray[i]);
