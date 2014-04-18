@@ -1,0 +1,42 @@
+{
+    "sectionkey": "variable",
+    "name": "Variable",
+    "help": "Variable blocks are for binding names with expressions. These expressions can be values or functions.",
+    "blocks": [
+        {
+            "blocktype": "step",
+            "id": "fd1795cc-7b5d-4a7d-a873-c892f252426f",
+            "script": "(define {{1}} {{2}})",
+            "help": "binds name to the expression given",
+            "locals": [
+                {
+                    "blocktype": "expression",
+                    "sockets": [
+                        {
+                            "name": "object##"
+                        }
+                    ],
+                    "script": "object##",
+                    "type": "object"
+                }
+            ],
+            "sockets": [
+                {
+                    "name": "name",
+                    "type": "any",
+                    "value": 0
+                },
+                {
+                    "name": "expression",
+                    "type": "any",
+                    "value": ""
+                }
+            ],
+            "keywords": [
+                "define",
+                "variable",
+                "expression"
+            ]
+        }
+    ]
+}

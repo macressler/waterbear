@@ -2663,3 +2663,24 @@ a .icon-flip-vertical:before {
 
 
 /*end languages/scheme/control.css*/
+
+/*begin languages/scheme/string.css*/
+.strings, .strings .holder{
+    border-color: hsl(240, 65%, 83%);
+    background-color: hsl(240, 65%, 93%);
+}
+
+/*end languages/scheme/string.css*/
+
+/*begin languages/scheme/variable.css*/
+.variable, .variable .holder{
+    border-color: #669999;
+    background-color: #669999;
+}
+
+.variable, .variable .variable {
+    border-color: #309;
+}
+
+
+/*end languages/scheme/variable.css*/

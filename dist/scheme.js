@@ -5455,11 +5455,14 @@ wb.l10nHalfDone = l10nHalfDone;
 
 (function(wb, Event){
  'use strict';
+    //var schemeLibText = document.insertBefore();
     var bscheme = new BiwaScheme.Interpreter(function(e, state) {
         document.querySelector('.stageframe').contentWindow.document.write(e.message);
     });
     //You could run your SchemeLibrary.lisp file right here and all functions
     //will be accessible
+    //Load file into 
+    //bscheme.evaluate();
     wb.runScript = function(script){
         var run = function(){
             wb.script = script;
@@ -5693,7 +5696,7 @@ wb.menu({
             "blocktype": "expression",
             "id": "7a52bc02-d5a0-4a1e-b0c3-8e2cf3484eb5",
             "type": "number",
-            "script": "(integer-divide {{1}} {{2}})",
+            "script": "(/ {{1}} {{2}})",
             "help": "quotient of the two operands",
             "sockets": [
                 {
@@ -5855,7 +5858,7 @@ wb.menu({
             "blocktype": "expression",
             "id": "bd9480c6-058d-4469-aa65-84142449ecbd",
             "type": "number",
-            "script": "(remainder {{1}} {{2}})",
+            "script": "(mod {{1}} {{2}})",
             "help": "modulus of a number is the remainder after whole number division",
             "sockets": [
                 {
@@ -6003,7 +6006,7 @@ wb.menu({
 wb.menu({
     "sectionkey": "lists",
     "name": "Lists",
-    "help": "Arrays are lists of items. Items can be added and removed, located, sorted and more.",
+    "help": "Lists are lists of items. Items can be added and removed, located, sorted and more.",
     "blocks": [
         {
             "blocktype": "expression",
@@ -6041,7 +6044,7 @@ wb.menu({
             "type": "any",
             "id": "85e9a7f8-a0ea-43ca-807d-83544372bae3",
             "script": "(cdr {{1}})",
-            "help": "the head element of a list",
+            "help": "the tail (Every element except the first) of a list",
             "sockets": [
                 {
                     "name": "tail of",
@@ -6217,6 +6220,289 @@ wb.menu({
 }
 );
 /*end languages/scheme/control.json*/
+
+/*begin languages/scheme/string.json*/
+wb.menu({
+    "sectionkey": "strings",
+    "name": "Strings",
+    "help": "String blocks represent or manipulate bits of text (strings of characters)",
+    "blocks": [
+        {
+            "blocktype": "expression",
+            "id": "afdce950-803d-40f7-8899-dcadfc5cdb3c",
+            "script": "{{1}}",
+            "type": "string",
+            "help": "Create a string literal by entering a list of characters",
+            "sockets": [
+                {
+                    "name": "make string",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "blocktype": "expression",
+            "id": "15c3549f-61a7-4f3a-b0ae-4bdbe94fc11d",
+            "type": "string",
+            "script": "(string-append {{1}} {{2}})",
+            "help": "returns a string by adding the second string to the end of the first string",
+            "sockets": [
+                {
+                    "name": "",
+                    "type": "string",
+                    "value": "hello"
+                },
+                {
+                    "name": "with",
+                    "type": "string",
+                    "value": "world",
+                    "suffix": "appended"
+                }
+            ]
+        },
+        {
+            "blocktype": "expression",
+            "id": "0f3a967b-a5c1-4a3d-8dad-08b23afa698e",
+            "type": "string",
+            "script": "(fold_left (lambda (x y) (string-append x (string y))) \"\" {{1}})",
+            "help": "returns a string made from the list of characters ",
+            "sockets": [
+                {
+                    "name": "string from list",
+                    "type": "list",
+                    "value": "()"
+                }
+            ]
+        },
+        {
+            "blocktype": "expression",
+            "id": "233d12af-8c69-4a71-89f8-229d15199f71",
+            "type": "boolean",
+            "script": "(string? {{1}})",
+            "help": "Returns the boolean value true if the argument is a string, false otherwise.",
+            "sockets": [
+                {
+                    "name": "is string? ",
+                    "type": "string",
+                    "value": "hello"
+                }
+            ]
+        },
+        {
+            "blocktype": "expression",
+            "id": "38a32ce6-a7dd-4f89-bda9-ebc033764c68",
+            "script": "(make-string 1 (string-ref {{1}} {{2}}))",
+            "type": "string",
+            "help": "Return a string of length 1 from the character at the specified index of the specified string.",
+            "sockets": [
+                {
+                    "name": "string",
+                    "type": "string",
+                    "value": null
+                },
+                {
+                    "name": "substring at",
+                    "type": "number",
+                    "value": "0"
+                }
+            ]
+        },
+        {
+            "blocktype": "expression",
+            "id": "cd23ba6c-b2b9-478e-ad27-77a71a1a1333",
+            "script": "(substring {{1}} {{2}} {{3}})",
+            "type": "string",
+            "help": "get the substring starting at the given index of named string and ending at the second given index",
+            "sockets": [
+                {
+                    "name": "string",
+                    "type": "string",
+                    "value": null
+                },
+                {
+                    "name": "substring from",
+                    "type": "number",
+                    "value": "0"
+                },
+                {
+                    "name": "to",
+                    "type": "number",
+                    "value": "0"
+                }
+            ]
+        },
+        {
+            "blocktype": "expression",
+            "id": "7ad8e3ff-f1d2-4f97-89dc-c6a5156e8b87",
+            "script": "(string->list {{1}})",
+            "type": "list",
+            "help": "Returns a list of the characters in the string",
+            "sockets": [
+                {
+                    "name": "list of characters in ",
+                    "type": "string",
+                    "suffix": "length"
+                }
+            ]
+        },
+        {
+            "blocktype": "expression",
+            "id": "89a090b1-e528-4a01-be34-b85eadd3d6d8",
+            "script": "(string>? {{1}} {{2}})",
+            "type": "boolean",
+            "help": "Does the first string come after the second string in lexicographic ordering?",
+            "sockets": [
+                {
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "name": "after",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "blocktype": "expression",
+            "id": "b169eb65-4f67-409b-b023-739ca02867a5",
+            "script": "(string<? {{1}} {{2}})",
+            "type": "boolean",
+            "help": "Does the first string come before the second string in lexicographic ordering?",
+            "sockets": [
+                {
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "name": "before",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "blocktype": "expression",
+            "id": "0c73036a-18e0-448f-b7e1-e812af1279dc",
+            "script": "(string-trim {{1}} {{2}})",
+            "type": "string",
+            "help": "change to uppercase",
+            "sockets": [
+                {
+                    "name": "to uppercase",
+                    "type": "string",
+                    "value": null
+                }
+            ]
+        },
+        {
+            "blocktype": "expression",
+            "id": "256716ec-08de-4c30-b930-eca5514935ea",
+            "script": "(string-replace {{1}} {{2}} {{3}})",
+            "type": "string",
+            "help": "Returns the string with all occurrences of the second string replaced by the third string",
+            "sockets": [
+                {
+                    "name": "string",
+                    "type": "string",
+                    "value": " "
+                },
+                {
+                    "name": "with all ",
+                    "type": "string",
+                    "value": " "
+                },
+                {
+                    "name": "replaced by ",
+                    "type": "string",
+                    "value": " "
+                }
+            ]
+        },
+        {
+            "blocktype": "expression",
+            "id": "601d0177-fda7-4f1f-ad53-8a35013396ff",
+            "type": "boolean",
+            "script": "(equal? {{1}} {{2}})",
+            "help": "two strings are equal",
+            "sockets": [
+                {
+                    "name": "",
+                    "type": "string",
+                    "value": " "
+                },
+                {
+                    "name": "=",
+                    "type": "string",
+                    "value": " "
+                }
+            ]
+        },
+        {
+            "blocktype": "expression",
+            "id": "4eca0590-d0d3-424c-878f-6852f83950a9",
+            "type": "boolean",
+            "script": "(not (equal? {{1}} {{2}}))",
+            "help": "two strings are not equal",
+            "sockets": [
+                {
+                    "name": "",
+                    "type": "string",
+                    "value": " "
+                },
+                {
+                    "name": "≠",
+                    "type": "string",
+                    "value": " "
+                }
+            ]
+        }
+    ]
+});
+/*end languages/scheme/string.json*/
+
+/*begin languages/scheme/variable.json*/
+wb.menu({
+    "sectionkey": "variable",
+    "name": "Variable",
+    "help": "Variable blocks are for binding names with expressions. These expressions can be values or functions.",
+    "blocks": [
+        {
+            "blocktype": "step",
+            "id": "fd1795cc-7b5d-4a7d-a873-c892f252426f",
+            "script": "(define {{1}} {{2}})",
+            "help": "binds name to the expression given",
+            "locals": [
+                {
+                    "blocktype": "expression",
+                    "sockets": [
+                        {
+                            "name": "object##"
+                        }
+                    ],
+                    "script": "object##",
+                    "type": "object"
+                }
+            ],
+            "sockets": [
+                {
+                    "name": "name",
+                    "type": "any",
+                    "value": 0
+                },
+                {
+                    "name": "expression",
+                    "type": "any",
+                    "value": ""
+                }
+            ],
+            "keywords": [
+                "define",
+                "variable",
+                "expression"
+            ]
+        }
+    ]
+});
+/*end languages/scheme/variable.json*/
 
 /*begin l10n.js*/
 (function(wb){

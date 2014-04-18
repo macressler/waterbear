@@ -6,11 +6,14 @@
 
 (function(wb, Event){
  'use strict';
+    //var schemeLibText = document.insertBefore();
     var bscheme = new BiwaScheme.Interpreter(function(e, state) {
         document.querySelector('.stageframe').contentWindow.document.write(e.message);
     });
     //You could run your SchemeLibrary.lisp file right here and all functions
     //will be accessible
+    //Load file into 
+    //bscheme.evaluate();
     wb.runScript = function(script){
         var run = function(){
             wb.script = script;

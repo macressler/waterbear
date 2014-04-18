@@ -1,7 +1,7 @@
 {
     "sectionkey": "lists",
     "name": "Lists",
-    "help": "Arrays are lists of items. Items can be added and removed, located, sorted and more.",
+    "help": "Lists are lists of items. Items can be added and removed, located, sorted and more.",
     "blocks": [
         {
             "blocktype": "expression",
@@ -39,7 +39,7 @@
             "type": "any",
             "id": "85e9a7f8-a0ea-43ca-807d-83544372bae3",
             "script": "(cdr {{1}})",
-            "help": "the head element of a list",
+            "help": "the tail (Every element except the first) of a list",
             "sockets": [
                 {
                     "name": "tail of",

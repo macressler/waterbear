@@ -1,0 +1,9 @@
+.variable, .variable .holder{
+    border-color: #669999;
+    background-color: #669999;
+}
+
+.variable, .variable .variable {
+    border-color: #309;
+}
+
