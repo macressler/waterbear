@@ -134,11 +134,19 @@
 		<button class="icon-check autorun-script-on">Autorun</button>
 		<button class="icon-unchecked autorun-script-off">Autorun</button>
 	</div>
-	<iframe class="stageframe" seamless="seamless" src="iframerunner.html"></iframe></div>
+	<iframe class="stageframe" seamless="seamless" src="iframerunner.html">
+    <link href=""/stylesheets/scheme_repl.css"" rel="stylesheet" type="text/css">
+    </iframe></div>
 	<div class="scripts_text_view"></div>
 </div>
 <script>
 	var iframe = document.querySelector('.stageframe');
+	/*var cssLink = document.createElement("link");
+        cssLink.href = "/stylesheets/scheme_repl.css"; 
+        cssLink .rel = "stylesheet"; 
+        cssLink .type = "text/css"; 
+        iframe.appendChild(cssLink);*/
+		
 	function receiveMessage(event){
 		wb.iframeReady = event.data === 'ready' ? true : false;
 	}
