@@ -79,7 +79,7 @@
             "blocktype": "expression",
             "id": "7a52bc02-d5a0-4a1e-b0c3-8e2cf3484eb5",
             "type": "number",
-            "script": "(integer-divide {{1}} {{2}})",
+            "script": "(/ {{1}} {{2}})",
             "help": "quotient of the two operands",
             "sockets": [
                 {
@@ -241,7 +241,7 @@
             "blocktype": "expression",
             "id": "bd9480c6-058d-4469-aa65-84142449ecbd",
             "type": "number",
-            "script": "(remainder {{1}} {{2}})",
+            "script": "(mod {{1}} {{2}})",
             "help": "modulus of a number is the remainder after whole number division",
             "sockets": [
                 {
