@@ -37,6 +37,19 @@
         {
             "blocktype": "expression",
             "type": "any",
+            "id": "35e81614-d109-4027-8f9e-39fb06c3f2d0",
+            "script": "(listrev {{1}})",
+            "help": "Reverses the elements of the given list",
+            "sockets": [
+                {
+                    "name": "reverse",
+                    "type": "array"
+                }
+            ]
+        },
+        {
+            "blocktype": "expression",
+            "type": "any",
             "id": "85e9a7f8-a0ea-43ca-807d-83544372bae3",
             "script": "(cdr {{1}})",
             "help": "the tail (Every element except the first) of a list",

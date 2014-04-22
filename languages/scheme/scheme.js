@@ -9,12 +9,39 @@
     //var schemeLibText = document.insertBefore();
     var bscheme = new BiwaScheme.Interpreter(function(e, state) {
         document.querySelector('.stageframe').contentWindow.document.write(e.message);
+        /*Instead of hardcoding these, can store in a different file and programmatically read them in.*/
         BiwaScheme.define_scmfunc('length', 1, 1,
         "(lambda (lst n)\
 	(if (equal? lst '())\
 		n\
 		(length (cdr lst) (+ n 1))\
 	))");
+        
+        BiwaScheme.define_scmfunc('listrevhelper', 1, 1,
+        "(lambda (lst acc)\
+	(if (equal? () lst)\
+		acc\
+		(listRevHelper (cdr lst) (cons (car lst) acc)\
+		)\
+	)\
+        )");
+        
+        BiwaScheme.define_scmfunc('listrev', 1,
+            "(lambda (lst)\
+                (listRevHelper lst ()))"
+        );
+        
+        /*BiwaScheme.define_scmfunc('lTree', 1,
+            "(define (lTree tree)\
+                (caddr tree)\
+        )");
+        
+        BiwaScheme.define_scmfunc('rTree', 1,
+        "(define (rTree tree)\
+	(car tree)\
+        )");*/
+        
+        BiwaScheme.define_scmfunc('data')
     });
 
     //You could run your SchemeLibrary.lisp file right here and all functions

@@ -13,12 +13,6 @@
 	(listTraversal (cdr lst)))
 	))
 
-(define (listRev lst)
-	(letrec (helper (lambda x))
-
-	)
-	(listRevHelper lst ()))
-
 (define (listRevHelper lst acc)
 	(if (equal? () lst)
 		acc
@@ -28,6 +22,9 @@
 
 	)
 )
+
+(define (listRev lst)
+	(listRevHelper lst ()))
 
 (define (map f lst)
 	(if (equal? () lst)
