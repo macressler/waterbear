@@ -5457,9 +5457,15 @@ wb.l10nHalfDone = l10nHalfDone;
  'use strict';
     //var schemeLibText = document.insertBefore();
     var bscheme = new BiwaScheme.Interpreter(function(e, state) {
-        document.querySelector('.stageframe').contentWindow.document.body.write(e.message);
+        document.querySelector('.stageframe').contentWindow.document.write(e.message);
+        BiwaScheme.define_scmfunc('length', 1, 1,
+        "(lambda (lst n)\
+	(if (equal? lst '())\
+		n\
+		(length (cdr lst) (+ n 1))\
+	))");
     });
-    
+
     //You could run your SchemeLibrary.lisp file right here and all functions
     //will be accessible
     //Load file into 
@@ -5470,18 +5476,13 @@ wb.l10nHalfDone = l10nHalfDone;
         var run = function(){
             wb.script = script;
             var scriptArray = script.split(";;end");
-            var cssLink = document.createElement("link");
-            cssLink.href = "/stylesheets/scheme_repl.css"; 
-            cssLink.rel = "stylesheet"; 
-            cssLink.type = "text/css"; 
-            document.querySelector('.stageframe').contentWindow.document.appendChild(cssLink);
-            document.querySelector('.stageframe').contentWindow.document.body.innerHTML = '';  
+            document.querySelector('.stageframe').contentWindow.document.body.innerHTML = "";
             for(var i = 0; i < scriptArray.length; i++) {
                 console.log('THIS IS IMPORTANT:' + scriptArray[i]);
                 bscheme.evaluate(scriptArray[i], function(result) {
                     if (result !== undefined && result !== BiwaScheme.undef) {
                         console.log(BiwaScheme.to_write(result));
-                        document.querySelector('.stageframe').contentWindow.document.body.write('==> ' + result + '<br>');
+                        document.querySelector('.stageframe').contentWindow.document.write('==> ' + result + '<br>');
                     }
                 });
             }
