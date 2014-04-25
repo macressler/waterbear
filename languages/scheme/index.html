@@ -94,6 +94,9 @@
 					<li>
 						<button class="toggle" data-target="scripts_text_view">Text Script</button>
 					</li>
+					<li>
+						<button class="toggle" data-target="code_map">Code Map</button>
+					</li>
 					<li class='separator'>
 						<button class="run-scripts">Run Full Size</button>
 						<button class="show-ide">Show IDE</button>
@@ -112,6 +115,11 @@
 			<li class="escape">
 				<button class="escape-embed">Open in Waterbear</button>
 			</li>
+			<li><button class="icon-play run-script">Run</button></li>
+<li><button class="icon-stop stop-script">Stop</button></li>
+<li><button class="icon-check autorun-script-on">Autorun</button></li>
+<li><button class="icon-unchecked autorun-script-off">Autorun</button></li>
+
 		</ul>
 	</nav>
 	<div id="context_menu"></div>
@@ -144,6 +152,7 @@
 		</div>
 		<div class="results">
 	<div class="stage">
+<<<<<<< HEAD
 	<div class="buttonmenu">
 		<button class="icon-play run-script">Run</button>
 		<button class="icon-stop stop-script">Stop</button>
@@ -153,6 +162,9 @@
 	<iframe class="stageframe" seamless="seamless" src="iframerunner.html">
     <link href=""/stylesheets/scheme_repl.css"" rel="stylesheet" type="text/css">
     </iframe></div>
+=======
+	<iframe class="stageframe" seamless="seamless" src="iframerunner.html"></iframe></div>
+>>>>>>> 57bc197f5be8bbe18d4800a1818dd99fd43013ea
 	<div class="scripts_text_view"></div>
 </div>
 <script>
@@ -175,9 +187,8 @@
 </script>
 
 		<div id="cm_container">
-		<div class="code_map">
 		<canvas id="cm_canvas"></canvas>
-		</div>
+		<div class="code_map"></div>
 		</div>
 	</div>
 	<svg class="sekrit-svg"><text class="resize-tester"></text></svg>
