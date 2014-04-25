@@ -3,9 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Waterbear scheme playground</title>
-<<<<<<< HEAD:scheme.html
 	<link href="dist/scheme.css" rel="stylesheet" />
-=======
 	<link rel="stylesheet" href="../../stylesheets/workspace.css" >
 <link rel="stylesheet" href="../../stylesheets/layout.css" >
 <link rel="stylesheet" href="../../stylesheets/blocks.css" >
@@ -19,7 +17,6 @@
 <link rel="stylesheet" href="blocks/list.css" >
 <link rel="stylesheet" href="blocks/tree.css" >
 <link rel="stylesheet" href="blocks/control.css" >
->>>>>>> 1009c7cdda67b2e7ceb4bab804a012c2249de03a:languages/scheme/index.html
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="viewport" content="width=device-width">
@@ -152,29 +149,11 @@
 		</div>
 		<div class="results">
 	<div class="stage">
-<<<<<<< HEAD
-	<div class="buttonmenu">
-		<button class="icon-play run-script">Run</button>
-		<button class="icon-stop stop-script">Stop</button>
-		<button class="icon-check autorun-script-on">Autorun</button>
-		<button class="icon-unchecked autorun-script-off">Autorun</button>
-	</div>
-	<iframe class="stageframe" seamless="seamless" src="iframerunner.html">
-    <link href=""/stylesheets/scheme_repl.css"" rel="stylesheet" type="text/css">
-    </iframe></div>
-=======
 	<iframe class="stageframe" seamless="seamless" src="iframerunner.html"></iframe></div>
->>>>>>> 57bc197f5be8bbe18d4800a1818dd99fd43013ea
 	<div class="scripts_text_view"></div>
 </div>
 <script>
 	var iframe = document.querySelector('.stageframe');
-	/*var cssLink = document.createElement("link");
-        cssLink.href = "/stylesheets/scheme_repl.css"; 
-        cssLink .rel = "stylesheet"; 
-        cssLink .type = "text/css"; 
-        iframe.appendChild(cssLink);*/
-		
 	function receiveMessage(event){
 		wb.iframeReady = event.data === 'ready' ? true : false;
 	}
