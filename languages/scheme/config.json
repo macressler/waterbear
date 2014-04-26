@@ -4,5 +4,5 @@
 	"ideLibs": ["ajax", "beautify", "highlight", "highlight-javascript","events.min", "biwascheme-min"],
 	"runtimeLibs": [],
 	"ideStyles": ["highlight-github"],
-	"runtimeStyles": []
+	"runtimeStyles": ["scheme_repl"]
 }
