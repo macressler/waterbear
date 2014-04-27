@@ -81,6 +81,23 @@
             },
             {
                 "blocktype": "expression",
+                "id": "53b0ff25-3761-4597-870e-76ffc4afeacf",
+                "script": "(binarysearch {{1}} {{2}})",
+                "type": "boolean",
+                "help": "Search the given tree for the given item",
+                "sockets": [
+                    {
+                        "name": "does",
+                        "type": "tree"
+                    },
+                    {
+                        "name": "contain",
+                        "type": "any"
+                    }
+                ]
+            },
+            {
+                "blocktype": "expression",
                 "id": "102ce9b4-ae29-4bd5-9bbc-effbbd3a177a",
                 "script": "(if (equals? (cdr {{1}}) ()) (car {{1}}) (cadr {{1}}))",
                 "type": "tree",
