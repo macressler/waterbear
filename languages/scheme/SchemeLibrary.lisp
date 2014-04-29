@@ -92,21 +92,8 @@
 	)
 )
 
-(define (treeInsert tree item)
-	(if (equal? (cdr tree) ())
-		(if ())
-	)
-)
-
 (define (treeDelete tree item)
 
-)
-
-(define (lstTreeHelper lst tree)
-	(if (equals? lst ())
-		tree
-		(lstTreeHelper (cdr lst) (treeInsert tree (car lst)))
-	)
 )
 
 (define (listToTree lst)
@@ -134,6 +121,33 @@
 (define (isLeaf tree) (equal? () (cdr tree)))
 
 (define (isNullTree tree) (equal? () tree))
+
+;;;My Ocaml code for reference
+
+;type 'a binaryTree = Node of 'a binaryTree * 'a * 'a binaryTree | Leaf
+
+;let rec bstInsert elem root =
+  ;match root with 
+    ;|Node(left, x, right) -> if elem > x 
+      ;then Node(left, x, (bstInsert elem right))
+      ;else Node((bstInsert elem left), x, right)
+    ;|Leaf -> Node(Leaf, elem, Leaf)
+
+  
+
+;let bstFromList lst =
+  ;let rec helper lst acc =
+    ;match lst with
+      ;|[] -> acc
+      ;|h::tl -> helper tl (bstInsert h acc) in
+      ;helper lst Leaf 
+
+ (define (treeInsert tree item)
+	(if (isLeaf tree) 
+		item
+		
+		)
+)
 
 (define (binarySearch tree item)
 	(if (isNullTree tree)
