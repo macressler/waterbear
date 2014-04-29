@@ -8,7 +8,9 @@
  'use strict';
     //var schemeLibText = document.insertBefore();
     var bscheme = new BiwaScheme.Interpreter(function(e, state) {
-        document.querySelector('.stageframe').contentWindow.document.write(e.message);
+        //document.querySelector('.stageframe').contentWindow.document.write(e.message);
+        var runtime = document.getElementsByTagName('iframe')[0];
+        runtime.document.body.write(e.message);
         /*Instead of hardcoding these, can store in a different file and programmatically read them in.*/
         BiwaScheme.define_scmfunc('length', 1, 1,
         "(lambda (lst n)\
@@ -54,12 +56,12 @@
         var run = function(){
             wb.script = script;
             var scriptArray = script.split(";;end");
-            document.querySelector('.stageframe').contentWindow.document.body.innerHTML = "";
+            document.querySelector('.stageframe').contentWindow.document.body.innerHTML += "TEST";
             for(var i = 0; i < scriptArray.length; i++) {
                 console.log('THIS IS IMPORTANT:' + scriptArray[i]);
                 bscheme.evaluate(scriptArray[i], function(result) {
                     if (result !== undefined && result !== BiwaScheme.undef) {
-                        console.log(BiwaScheme.to_write(result));
+                        //console.log(BiwaScheme.to_write(result));
                         document.querySelector('.stageframe').contentWindow.document.write('==> ' + result + '<br>');
                     }
                 });

@@ -8,7 +8,8 @@
  'use strict';
     //var schemeLibText = document.insertBefore();
     var bscheme = new BiwaScheme.Interpreter(function(e, state) {
-        document.querySelector('.stageframe').contentWindow.document.write(e.message);
+        //document.querySelector('.stageframe').contentWindow.document.body.write(e.message);
+	document.getElementsByTagName('iframe')[0].document.style.background = '#000000';
         /*Instead of hardcoding these, can store in a different file and programmatically read them in.*/
         BiwaScheme.define_scmfunc('length', 1, 1,
         "(lambda (lst n)\
@@ -54,13 +55,14 @@
         var run = function(){
             wb.script = script;
             var scriptArray = script.split(";;end");
+	    console.log("HEY RIGHT HERE!");
             document.querySelector('.stageframe').contentWindow.document.body.innerHTML = "";
             for(var i = 0; i < scriptArray.length; i++) {
-                console.log('THIS IS IMPORTANT:' + scriptArray[i]);
+                //console.log('THIS IS IMPORTANT:' + scriptArray[i]);
                 bscheme.evaluate(scriptArray[i], function(result) {
                     if (result !== undefined && result !== BiwaScheme.undef) {
                         console.log(BiwaScheme.to_write(result));
-                        document.querySelector('.stageframe').contentWindow.document.write('==> ' + result + '<br>');
+                        document.querySelector('.stageframe').contentWindow.document.body.innerHTML = '==> ' + result + '<br>';
                     }
                 });
             }
@@ -100,7 +102,8 @@
  
     function clearStage(event){
         wb.iframeReady = false;
-        document.querySelector('.stageframe').contentWindow.document.body.innerHTML = ''; 
+        //document.querySelector('.stageframe').contentWindow.document.body.innerHTML = '';
+	document.getElementsByTagName('iframe')[0].document.body.innerHTML = '';
     }
     wb.clearStage = clearStage;
 
