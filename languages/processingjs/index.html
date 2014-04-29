@@ -2,28 +2,23 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>Waterbear node playground</title>
+	<title>Waterbear processingjs playground</title>
 	<link rel="stylesheet" href="../../stylesheets/workspace.css" >
 <link rel="stylesheet" href="../../stylesheets/layout.css" >
 <link rel="stylesheet" href="../../stylesheets/blocks.css" >
 <link rel="stylesheet" href="../../stylesheets/menu.css" >
 <link rel="stylesheet" href="../../stylesheets/fonts/fontawesome.css" >
 <link rel="stylesheet" href="../../stylesheets/highlight-github.css" >
-<link rel="stylesheet" href="node.css" >
-<link rel="stylesheet" href="blocks/node.css" >
-<link rel="stylesheet" href="blocks/control.css" >
-<link rel="stylesheet" href="blocks/piface.css" >
-<link rel="stylesheet" href="blocks/pibrella_simple.css" >
-<link rel="stylesheet" href="blocks/firmata.css" >
-<link rel="stylesheet" href="blocks/mc_game.css" >
-<link rel="stylesheet" href="blocks/mc_player.css" >
-<link rel="stylesheet" href="blocks/mc_position.css" >
-<link rel="stylesheet" href="blocks/mc_blocks.css" >
-<link rel="stylesheet" href="blocks/mc_camera.css" >
-<link rel="stylesheet" href="blocks/array.css" >
-<link rel="stylesheet" href="blocks/boolean.css" >
+<link rel="stylesheet" href="processingjs.css" >
+<link rel="stylesheet" href="blocks/processingjs.css" >
+<link rel="stylesheet" href="blocks/structure.css" >
+<link rel="stylesheet" href="blocks/environment.css" >
+<link rel="stylesheet" href="blocks/controls.css" >
+<link rel="stylesheet" href="blocks/shapes.css" >
+<link rel="stylesheet" href="blocks/input.css" >
+<link rel="stylesheet" href="blocks/colors.css" >
 <link rel="stylesheet" href="blocks/math.css" >
-<link rel="stylesheet" href="blocks/string.css" >
+<link rel="stylesheet" href="blocks/transform.css" >
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="viewport" content="width=device-width">
@@ -40,7 +35,7 @@
 <body class="autorun">
 	<div class="titlebar">
 		<img src="../../images/logo.png" />
-		<h1 class="title">node playground</h1>
+		<h1 class="title">processingjs playground</h1>
 	</div>
 	<nav class="mobilenav">
 		<button class="show-files">Files</button>
@@ -74,7 +69,16 @@
 			<li>
 				<button class="show-examples">Examples&#x25BE;</button>
 				<ul class="sub-menu">
-					
+					<li><button class="load-example" data-example="ellipses">Ellipses</button></li>
+<li><button class="load-example" data-example="lines">Lines</button></li>
+<li><button class="load-example" data-example="mouse_click">Mouse Click</button></li>
+<li><button class="load-example" data-example="mouse_rectangles">Mouse Rectangles</button></li>
+<li><button class="load-example" data-example="nofill">No Fill</button></li>
+<li><button class="load-example" data-example="rectangle">Rectangle</button></li>
+<li><button class="load-example" data-example="transform">Transform</button></li>
+<li><button class="load-example" data-example="transform_color">Transform Color</button></li>
+<li><button class="load-example" data-example="variables">Variables</button></li>
+
 				</ul>
 			</li>
 			<li>
@@ -155,11 +159,22 @@
 			<div class="scratchpad hidden">Scratch space, drag blocks here to re-use</div>
 		</div>
 		<div class="results">
-    <div class="remote">
-        <div class="messagebox"></div>
-    </div>
+	<div class="stage">
+	<iframe class="stageframe" seamless="seamless" src="runtime.html"></iframe></div>
 	<div class="scripts_text_view"></div>
 </div>
+<script>
+	var iframe = document.querySelector('.stageframe');
+	function receiveMessage(event){
+		wb.iframeReady = event.data === 'ready' ? true : false;
+	}
+	window.addEventListener('message', receiveMessage, false);
+	// Work around Chrome bug with iframes in flexbox
+	iframe.style.height = iframe.parentElement.clientHeight + 'px';
+	window.addEventListener('resize', function(evt){
+		iframe.style.height = iframe.parentElement.clientHeight + 'px';			
+	}, false);
+</script>
 
 		<div id="cm_container">
 		<canvas id="cm_canvas"></canvas>
@@ -170,6 +185,7 @@
 	<script src="../../lib/beautify.js"></script>
 <script src="../../lib/highlight.js"></script>
 <script src="../../lib/highlight-javascript.js"></script>
+<script src="../../lib/processing-1.4.1.js"></script>
 <script src="../../lib/events.min.js"></script>
 <script src="../../scripts/queryparams.js"></script>
 <script src="../../scripts/util.js"></script>
@@ -184,34 +200,24 @@
 <script src="../../scripts/menu.js"></script>
 <script src="../../scripts/code_map.js"></script>
 <script src="ide.js"></script>
-<script src="blocks/node_ide.js"></script>
-<script src="blocks/control_ide.js"></script>
-<script src="blocks/piface_ide.js"></script>
-<script src="blocks/pibrella_simple_ide.js"></script>
-<script src="blocks/firmata_ide.js"></script>
-<script src="blocks/mc_game_ide.js"></script>
-<script src="blocks/mc_player_ide.js"></script>
-<script src="blocks/mc_position_ide.js"></script>
-<script src="blocks/mc_blocks_ide.js"></script>
-<script src="blocks/mc_camera_ide.js"></script>
-<script src="blocks/array_ide.js"></script>
-<script src="blocks/boolean_ide.js"></script>
+<script src="blocks/processingjs_ide.js"></script>
+<script src="blocks/structure_ide.js"></script>
+<script src="blocks/environment_ide.js"></script>
+<script src="blocks/controls_ide.js"></script>
+<script src="blocks/shapes_ide.js"></script>
+<script src="blocks/input_ide.js"></script>
+<script src="blocks/colors_ide.js"></script>
 <script src="blocks/math_ide.js"></script>
-<script src="blocks/string_ide.js"></script>
-<script src="blocks/node_blockmenu.js"></script>
-<script src="blocks/control_blockmenu.js"></script>
-<script src="blocks/piface_blockmenu.js"></script>
-<script src="blocks/pibrella_simple_blockmenu.js"></script>
-<script src="blocks/firmata_blockmenu.js"></script>
-<script src="blocks/mc_game_blockmenu.js"></script>
-<script src="blocks/mc_player_blockmenu.js"></script>
-<script src="blocks/mc_position_blockmenu.js"></script>
-<script src="blocks/mc_blocks_blockmenu.js"></script>
-<script src="blocks/mc_camera_blockmenu.js"></script>
-<script src="blocks/array_blockmenu.js"></script>
-<script src="blocks/boolean_blockmenu.js"></script>
+<script src="blocks/transform_ide.js"></script>
+<script src="blocks/processingjs_blockmenu.js"></script>
+<script src="blocks/structure_blockmenu.js"></script>
+<script src="blocks/environment_blockmenu.js"></script>
+<script src="blocks/controls_blockmenu.js"></script>
+<script src="blocks/shapes_blockmenu.js"></script>
+<script src="blocks/input_blockmenu.js"></script>
+<script src="blocks/colors_blockmenu.js"></script>
 <script src="blocks/math_blockmenu.js"></script>
-<script src="blocks/string_blockmenu.js"></script>
+<script src="blocks/transform_blockmenu.js"></script>
 <script src="../../scripts/l10n.js"></script>
 <script src="../../scripts/workspace.js"></script>
 </body>

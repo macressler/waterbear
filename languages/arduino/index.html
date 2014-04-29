@@ -2,28 +2,21 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>Waterbear node playground</title>
+	<title>Waterbear arduino playground</title>
 	<link rel="stylesheet" href="../../stylesheets/workspace.css" >
 <link rel="stylesheet" href="../../stylesheets/layout.css" >
 <link rel="stylesheet" href="../../stylesheets/blocks.css" >
 <link rel="stylesheet" href="../../stylesheets/menu.css" >
 <link rel="stylesheet" href="../../stylesheets/fonts/fontawesome.css" >
-<link rel="stylesheet" href="../../stylesheets/highlight-github.css" >
-<link rel="stylesheet" href="node.css" >
-<link rel="stylesheet" href="blocks/node.css" >
-<link rel="stylesheet" href="blocks/control.css" >
-<link rel="stylesheet" href="blocks/piface.css" >
-<link rel="stylesheet" href="blocks/pibrella_simple.css" >
-<link rel="stylesheet" href="blocks/firmata.css" >
-<link rel="stylesheet" href="blocks/mc_game.css" >
-<link rel="stylesheet" href="blocks/mc_player.css" >
-<link rel="stylesheet" href="blocks/mc_position.css" >
-<link rel="stylesheet" href="blocks/mc_blocks.css" >
-<link rel="stylesheet" href="blocks/mc_camera.css" >
-<link rel="stylesheet" href="blocks/array.css" >
+<link rel="stylesheet" href="arduino.css" >
+<link rel="stylesheet" href="blocks/arduino.css" >
 <link rel="stylesheet" href="blocks/boolean.css" >
+<link rel="stylesheet" href="blocks/control.css" >
+<link rel="stylesheet" href="blocks/digitalio.css" >
 <link rel="stylesheet" href="blocks/math.css" >
-<link rel="stylesheet" href="blocks/string.css" >
+<link rel="stylesheet" href="blocks/serialio.css" >
+<link rel="stylesheet" href="blocks/timing.css" >
+<link rel="stylesheet" href="blocks/variables.css" >
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="viewport" content="width=device-width">
@@ -40,7 +33,7 @@
 <body class="autorun">
 	<div class="titlebar">
 		<img src="../../images/logo.png" />
-		<h1 class="title">node playground</h1>
+		<h1 class="title">arduino playground</h1>
 	</div>
 	<nav class="mobilenav">
 		<button class="show-files">Files</button>
@@ -155,9 +148,6 @@
 			<div class="scratchpad hidden">Scratch space, drag blocks here to re-use</div>
 		</div>
 		<div class="results">
-    <div class="remote">
-        <div class="messagebox"></div>
-    </div>
 	<div class="scripts_text_view"></div>
 </div>
 
@@ -167,9 +157,7 @@
 		</div>
 	</div>
 	<svg class="sekrit-svg"><text class="resize-tester"></text></svg>
-	<script src="../../lib/beautify.js"></script>
-<script src="../../lib/highlight.js"></script>
-<script src="../../lib/highlight-javascript.js"></script>
+	<script src="../../lib/ajax.js"></script>
 <script src="../../lib/events.min.js"></script>
 <script src="../../scripts/queryparams.js"></script>
 <script src="../../scripts/util.js"></script>
@@ -184,34 +172,22 @@
 <script src="../../scripts/menu.js"></script>
 <script src="../../scripts/code_map.js"></script>
 <script src="ide.js"></script>
-<script src="blocks/node_ide.js"></script>
-<script src="blocks/control_ide.js"></script>
-<script src="blocks/piface_ide.js"></script>
-<script src="blocks/pibrella_simple_ide.js"></script>
-<script src="blocks/firmata_ide.js"></script>
-<script src="blocks/mc_game_ide.js"></script>
-<script src="blocks/mc_player_ide.js"></script>
-<script src="blocks/mc_position_ide.js"></script>
-<script src="blocks/mc_blocks_ide.js"></script>
-<script src="blocks/mc_camera_ide.js"></script>
-<script src="blocks/array_ide.js"></script>
+<script src="blocks/arduino_ide.js"></script>
 <script src="blocks/boolean_ide.js"></script>
+<script src="blocks/control_ide.js"></script>
+<script src="blocks/digitalio_ide.js"></script>
 <script src="blocks/math_ide.js"></script>
-<script src="blocks/string_ide.js"></script>
-<script src="blocks/node_blockmenu.js"></script>
-<script src="blocks/control_blockmenu.js"></script>
-<script src="blocks/piface_blockmenu.js"></script>
-<script src="blocks/pibrella_simple_blockmenu.js"></script>
-<script src="blocks/firmata_blockmenu.js"></script>
-<script src="blocks/mc_game_blockmenu.js"></script>
-<script src="blocks/mc_player_blockmenu.js"></script>
-<script src="blocks/mc_position_blockmenu.js"></script>
-<script src="blocks/mc_blocks_blockmenu.js"></script>
-<script src="blocks/mc_camera_blockmenu.js"></script>
-<script src="blocks/array_blockmenu.js"></script>
+<script src="blocks/serialio_ide.js"></script>
+<script src="blocks/timing_ide.js"></script>
+<script src="blocks/variables_ide.js"></script>
+<script src="blocks/arduino_blockmenu.js"></script>
 <script src="blocks/boolean_blockmenu.js"></script>
+<script src="blocks/control_blockmenu.js"></script>
+<script src="blocks/digitalio_blockmenu.js"></script>
 <script src="blocks/math_blockmenu.js"></script>
-<script src="blocks/string_blockmenu.js"></script>
+<script src="blocks/serialio_blockmenu.js"></script>
+<script src="blocks/timing_blockmenu.js"></script>
+<script src="blocks/variables_blockmenu.js"></script>
 <script src="../../scripts/l10n.js"></script>
 <script src="../../scripts/workspace.js"></script>
 </body>
