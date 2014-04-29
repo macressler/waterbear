@@ -97,22 +97,30 @@
 ;;;an element representing the data of the node itself, and a list representing
 ;;;the right subtree
 
+;;;If tree contains the item, deletes it and returns a tuple
+;;;with the new tree and true, else returns a tuple with the same tree and
+;;;false.
 (define (treeDelete tree item)
 
 )
 
+
+;;;Given a list of elements, turns the list into a binary search tree
 (define (listToTree lst)
 	(fold_left treeInsert (list car lst) (cdr lst))
 )
 
+;;;Gets the data element of a node
 (define (data tree) 
 	(if (equals? (cdr tree) ()) (car tree) (cadr tree))
 )
 
+;;;Left subtree
 (define (lTree tree)
 	(caddr tree)
 )
 
+;;;Right subtree
 (define (rTree tree)
 	(car tree)
 )
@@ -147,6 +155,7 @@
       ;|h::tl -> helper tl (bstInsert h acc) in
       ;helper lst Leaf 
 
+;;;Inserts item into the binary search tree bst
  (define (treeInsert tree item)
 	(if (isLeaf tree) 
 		item
@@ -154,6 +163,14 @@
 		)
 )
 
+;;;Traverse a tree and determine if it's a valid BST
+(define (isBST tree)
+
+)
+
+;;;Given a binary search tree and an element,
+;;;traverses the tree and returns true if the element is
+;;;in the tree, false otherwise
 (define (binarySearch tree item)
 	(if (isNullTree tree)
 		#f
