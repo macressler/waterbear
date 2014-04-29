@@ -62,7 +62,7 @@
                 bscheme.evaluate(scriptArray[i], function(result) {
                     if (result !== undefined && result !== BiwaScheme.undef) {
                         console.log(BiwaScheme.to_write(result));
-                        document.querySelector('.stageframe').contentWindow.document.body.innerHTML = '==> ' + result + '<br>';
+                        document.querySelector('.stageframe').contentWindow.document.body.innerHTML = ' ==> ' + result + '<br>';
                     }
                 });
             }
