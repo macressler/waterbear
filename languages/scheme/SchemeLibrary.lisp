@@ -92,6 +92,11 @@
 	)
 )
 
+;;;Binary tree methods. A binary tree is represented as follows:
+;;;A node is a list of three elements: a list representing the left subtree,
+;;;an element representing the data of the node itself, and a list representing
+;;;the right subtree
+
 (define (treeDelete tree item)
 
 )
@@ -145,7 +150,7 @@
  (define (treeInsert tree item)
 	(if (isLeaf tree) 
 		item
-		
+
 		)
 )
 
