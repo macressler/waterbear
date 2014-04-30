@@ -10,6 +10,7 @@
     var bscheme = new BiwaScheme.Interpreter(function(e, state) {
         //document.querySelector('.stageframe').contentWindow.document.body.write(e.message);
 	document.getElementsByTagName('iframe')[0].document.style.background = '#000000';
+	/*Run function to create text input to the repl*/
         /*Instead of hardcoding these, can store in a different file and programmatically read them in.*/
         BiwaScheme.define_scmfunc('length', 1, 1,
         "(lambda (lst n)\
@@ -41,8 +42,12 @@
         "(define (rTree tree)\
 	(car tree)\
         )");*/
-        
-        BiwaScheme.define_scmfunc('data')
+	
+	bscheme.evaluate(
+	    "(define (lTree tree)\
+                (caddr tree)\
+        )"
+			 );
     });
 
     //You could run your SchemeLibrary.lisp file right here and all functions
