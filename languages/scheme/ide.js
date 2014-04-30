@@ -80,7 +80,7 @@
         var script = elements.map(function(elem){
             return wb.codeFromBlock(elem);
         }).join('');
-        view.innerHTML = '<pre class="language-scheme">' + script + '</pre>';
+        view.innerHTML = '<pre class="prettyprint lang-lisp">' + script + '</pre>';
     };
 
     wb.wrap = function(script){ //doesn't do anything
