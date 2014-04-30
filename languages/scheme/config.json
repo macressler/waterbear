@@ -1,8 +1,8 @@
 {
 	"runsInBrowser": true,
 	"plugins": ["scheme", "boolean", "number", "list", "tree", "control"],
-	"ideLibs": ["ajax", "beautify", "highlight", "highlight-javascript","events.min", "biwascheme-min"],
-	"runtimeLibs": [],
+	"ideLibs": ["ajax", "beautify", "highlight", "highlight-javascript","events.min", "biwascheme-min", "lang-lisp"],
+	"runtimeLibs": ["scheme_repl"],
 	"ideStyles": ["highlight-github"],
 	"runtimeStyles": ["scheme_repl"]
 }

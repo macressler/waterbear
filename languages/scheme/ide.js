@@ -70,6 +70,7 @@
         run();
     }
 
+    //Add plugin for syntax highlighting
     wb.writeScript = function(elements, view){
         var script = elements.map(function(elem){
             return wb.codeFromBlock(elem);
