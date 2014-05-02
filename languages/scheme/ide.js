@@ -9,6 +9,20 @@
     //var schemeLibText = document.insertBefore();
     var frame = document.getElementsByTagName("iframe")[0];
     
+    function getDisplay(frame) {
+	return frame.contentWindow.document.getElementById("display");
+    }
+    
+    function setSubmitListener(frame, interpreter) {
+	var submit = document.getElementById("repl_input");
+	submit.readOnly = false;
+	submit.onsubmit = function(){
+	  var value = submit.value;
+	  submit.value = "";
+	  interpreter.evaluate(value);
+	};
+    }
+    
     var bscheme = new BiwaScheme.Interpreter(function(e, state) {
         //document.querySelector('.stageframe').contentWindow.document.body.write(e.message);
 	
@@ -51,6 +65,8 @@
         )"
 			 );
     });
+    
+    setSubmitListener(frame, bscheme);
 
     //You could run your SchemeLibrary.lisp file right here and all functions
     //will be accessible
@@ -68,6 +84,7 @@
                 bscheme.evaluate(scriptArray[i], function(result) {
                     if (result !== undefined && result !== BiwaScheme.undef) {
                         console.log(BiwaScheme.to_write(result));
+			getDisplay(document.querySelector('.stageframe')).innerHTML = '<br>' + ' ==> ' + result + '</br>';
                         //document.querySelector('.stageframe').contentWindow.document.body.innerHTML = '<br>' + ' ==> ' + result + '</br>';
                     }
                 });
@@ -110,7 +127,7 @@
     function clearStage(event){
         wb.iframeReady = false;
         //document.querySelector('.stageframe').contentWindow.document.body.innerHTML = '';
-	document.getElementsByTagName('iframe')[0].document.body.innerHTML = '';
+	document.getElementsByTagName('iframe')[0].document.getElementById('display').innerHTML = '';
     }
     wb.clearStage = clearStage;
 
