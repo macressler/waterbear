@@ -1,5 +1,7 @@
-(function(global) {
+(function (global) {
+    'use strict';
     var currentUser;
+    var auth = {};
 
     var signinLink = document.getElementById('signin');
     if (signinLink) {
@@ -41,6 +43,22 @@
         }
     }
 
+    function authSentinel(xhr) {
+        return function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    console.log("eh");
+                    currentUser = xhr.response.currentUser;
+                    return true;
+                } else {
+                    console.log("nyeh");
+                    currentUser = null;
+                    return false;
+                }
+            }
+        }
+    }
+
     function verifyAssertion(assertion) {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/auth/persona?assertion=" + assertion.toString(), true);
@@ -56,9 +74,18 @@
         xhr.send();
     }
 
+    auth.isLoggedIn = function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "auth/isAuthenticated", true);
+        xhr.onreadystatechange = authSentinel(xhr);
+        xhr.send();
+    }
+
     navigator.id.watch({
         loggedInUser: currentUser,
         onlogin: verifyAssertion,
         onlogout: signoutUser
     });
+
+    global.auth = auth;
 })(this);

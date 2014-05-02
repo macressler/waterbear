@@ -28,44 +28,29 @@
     // Save script to gist;
     function saveCurrentScriptsToGist(event) {
         event.preventDefault();
+        var loggedin = auth.isLoggedIn();
+        var makeObj;
         // console.log("Saving to Gist");
 
-        // var xhr = new XMLHttpRequest();
-        // xhr.open("GET", "/isAuthenticated", true);
-        // xhr.onreadystatechange = function(xhr) {
-        //     if (xhr.readyState == 4) {
-        //         if (xhr.state == 200) {
-
-        //         } else {
-
-        //         }
-        //     }
-
-
-        // };
-        // xhr.send();
-
-        var makeObj = {
-            email: "eddy3334@gmail.com",
-            url: "http://www.google.com",
-            contentType: "application/what",
-        };
-
-        // var el = document.getElementsByClassName("overlay");
-        // console.log("%o", el);
-        // console.log("%o", el[0]);
-        // el[0].style.visibility = (el[0].style.visibility == "visible") ? "hidden" : "visible";
-
+        if (loggedin) {
+            makeObj = {
+                email: currentUser,
+                url: "http://www.notarealurl.com",
+                contentType: "application/json",
+                tags: [
+                    "waterbear"
+                ]
+            };
+        }
 
         var title = prompt("Save to an anonymous Gist titled: ");
         if (!title) return;
         makeObj.title = title;
 
-        console.log(makeObj);
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                alert("SUCCESS!");
+                console.log("make obj successfully created");
             }
         };
         xhr.open("POST", "/make/create", true);
@@ -181,6 +166,7 @@
         if (!gistID) return;
         ajax.get("https://api.github.com/gists/" + gistID, function(data) {
             loadScriptsFromGist({
+
                 data: JSON.parse(data)
             });
         }, function(statusCode, x) {

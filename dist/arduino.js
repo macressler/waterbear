@@ -121,8 +121,10 @@ var l10nFiles = {};
 /*end ajax.js*/
 
 /*begin auth.js*/
-(function(global) {
+(function (global) {
+    'use strict';
     var currentUser;
+    var auth = {};
 
     var signinLink = document.getElementById('signin');
     if (signinLink) {
@@ -164,6 +166,22 @@ var l10nFiles = {};
         }
     }
 
+    function authSentinel(xhr) {
+        return function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    console.log("eh");
+                    currentUser = xhr.response.currentUser;
+                    return true;
+                } else {
+                    console.log("nyeh");
+                    currentUser = null;
+                    return false;
+                }
+            }
+        }
+    }
+
     function verifyAssertion(assertion) {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/auth/persona?assertion=" + assertion.toString(), true);
@@ -179,11 +197,20 @@ var l10nFiles = {};
         xhr.send();
     }
 
+    auth.isLoggedIn = function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "auth/isAuthenticated", true);
+        xhr.onreadystatechange = authSentinel(xhr);
+        xhr.send();
+    }
+
     navigator.id.watch({
         loggedInUser: currentUser,
         onlogin: verifyAssertion,
         onlogout: signoutUser
     });
+
+    global.auth = auth;
 })(this);
 /*end auth.js*/
 
@@ -2236,34 +2263,23 @@ var l10nFiles = {};
     // Save script to gist;
     function saveCurrentScriptsToGist(event) {
         event.preventDefault();
+        var loggedin = auth.isLoggedIn();
+        var makeObj;
         // console.log("Saving to Gist");
 
-        // var xhr = new XMLHttpRequest();
-        // xhr.open("GET", "/isAuthenticated", true);
-        // xhr.onreadystatechange = function(xhr) {
-        //     if (xhr.readyState == 4) {
-        //         if (xhr.state == 200) {
+        console.log("yo sup");
+        if (loggedin) {
+            makeObj = {
+                email: currentUser,
+                url: "http://www.notarealurl.com",
+                contentType: "application/json",
+                tags: [
+                    "waterbear"
+                ]
+            };
 
-        //         } else {
-
-        //         }
-        //     }
-
-
-        // };
-        // xhr.send();
-
-        var makeObj = {
-            email: "eddy3334@gmail.com",
-            url: "http://www.google.com",
-            contentType: "application/what",
-        };
-
-        // var el = document.getElementsByClassName("overlay");
-        // console.log("%o", el);
-        // console.log("%o", el[0]);
-        // el[0].style.visibility = (el[0].style.visibility == "visible") ? "hidden" : "visible";
-
+            alert("whoopee");
+        }
 
         var title = prompt("Save to an anonymous Gist titled: ");
         if (!title) return;
@@ -2389,6 +2405,7 @@ var l10nFiles = {};
         if (!gistID) return;
         ajax.get("https://api.github.com/gists/" + gistID, function(data) {
             loadScriptsFromGist({
+
                 data: JSON.parse(data)
             });
         }, function(statusCode, x) {
