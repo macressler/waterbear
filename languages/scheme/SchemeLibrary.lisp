@@ -5,6 +5,27 @@
 	)
 )
 
+;;;Methods for queues
+;;;Define a queue as a pair of lists
+
+;;;Attaches elem to the first list in the queue
+(define (push queue elem)
+	(cons (cons elem (car stack)) (cadr queue))
+)
+
+;;;Returns a tuple with the element in the first
+;;;spot, and the queue without the element in the second spot
+(define (pop queue)
+	(cons (car (car queue))
+)
+
+(define (requeue queue)
+	(if (equal? (car queue) ())
+		queue
+		(requeue (cons (cdr (car queue))) (cadr queue))
+	)
+)
+
 
 (define (listTraversal lst)
 (if (equal? () lst)
@@ -165,7 +186,7 @@
 
 ;;;Traverse a tree and determine if it's a valid BST
 (define (isBST tree)
-
+	
 )
 
 ;;;Given a binary search tree and an element,
