@@ -28,7 +28,7 @@
 	
 	/*Run function to create text input to the repl*/
         /*Instead of hardcoding these, can store in a different file and programmatically read them in.*/
-        BiwaScheme.define_scmfunc('length', 1, 1,
+        /*BiwaScheme.define_scmfunc('length', 1, 1,
         "(lambda (lst n)\
 	(if (equal? lst '())\
 		n\
@@ -42,12 +42,12 @@
 		(listRevHelper (cdr lst) (cons (car lst) acc)\
 		)\
 	)\
-        )");
+        )");*/
         
-        BiwaScheme.define_scmfunc('listrev', 1,
+        /*BiwaScheme.define_scmfunc('listrev', 1,
             "(lambda (lst)\
                 (listRevHelper lst ()))"
-        );
+        );*/
         
         /*BiwaScheme.define_scmfunc('lTree', 1,
             "(define (lTree tree)\
@@ -59,14 +59,14 @@
 	(car tree)\
         )");*/
 	
-	bscheme.evaluate(
+	/*bscheme.evaluate(
 	    "(define (lTree tree)\
                 (caddr tree)\
         )"
-			 );
+			 );*/
     });
     
-    setSubmitListener(frame, bscheme);
+    //setSubmitListener(frame, bscheme);
 
     //You could run your SchemeLibrary.lisp file right here and all functions
     //will be accessible

@@ -2,7 +2,7 @@
 	"runsInBrowser": true,
 	"plugins": ["scheme", "boolean", "number", "list", "tree", "control"],
 	"ideLibs": ["ajax", "beautify", "highlight", "highlight-javascript","events.min", "biwascheme-min", "prettify", "lang-lisp"],
-	"runtimeLibs": ["scheme_repl"],
+	"runtimeLibs": ["biwascheme-min","scheme_repl"],
 	"ideStyles": ["highlight-github", "prettify.css"],
 	"runtimeStyles": ["scheme_repl"]
 }
