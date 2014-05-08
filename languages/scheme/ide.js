@@ -23,49 +23,6 @@
 	};
     }
     
-    var bscheme = new BiwaScheme.Interpreter(function(e, state) {
-        //document.querySelector('.stageframe').contentWindow.document.body.write(e.message);
-	
-	/*Run function to create text input to the repl*/
-        /*Instead of hardcoding these, can store in a different file and programmatically read them in.*/
-        /*BiwaScheme.define_scmfunc('length', 1, 1,
-        "(lambda (lst n)\
-	(if (equal? lst '())\
-		n\
-		(length (cdr lst) (+ n 1))\
-	))");
-        
-        BiwaScheme.define_scmfunc('listrevhelper', 1, 1,
-        "(lambda (lst acc)\
-	(if (equal? () lst)\
-		acc\
-		(listRevHelper (cdr lst) (cons (car lst) acc)\
-		)\
-	)\
-        )");*/
-        
-        /*BiwaScheme.define_scmfunc('listrev', 1,
-            "(lambda (lst)\
-                (listRevHelper lst ()))"
-        );*/
-        
-        /*BiwaScheme.define_scmfunc('lTree', 1,
-            "(define (lTree tree)\
-                (caddr tree)\
-        )");
-        
-        BiwaScheme.define_scmfunc('rTree', 1,
-        "(define (rTree tree)\
-	(car tree)\
-        )");*/
-	
-	/*bscheme.evaluate(
-	    "(define (lTree tree)\
-                (caddr tree)\
-        )"
-			 );*/
-    });
-    
     //setSubmitListener(frame, bscheme);
 
     //You could run your SchemeLibrary.lisp file right here and all functions
@@ -73,22 +30,24 @@
     //Load file into 
     //bscheme.evaluate();
     
+    //Send message in the runscript function.
     
     wb.runScript = function(script){
         var run = function(){
             wb.script = script;
             var scriptArray = script.split(";;end");
+	    frame.contentWindow.postMessage(scriptArray.join('\n'), "*");
             //document.querySelector('.stageframe').contentWindow.document.body.innerHTML = "";
-            for(var i = 0; i < scriptArray.length; i++) {
+            /*for(var i = 0; i < scriptArray.length; i++) {
                 //console.log('THIS IS IMPORTANT:' + scriptArray[i]);
                 bscheme.evaluate(scriptArray[i], function(result) {
                     if (result !== undefined && result !== BiwaScheme.undef) {
                         console.log(BiwaScheme.to_write(result));
 			getDisplay(document.querySelector('.stageframe')).innerHTML = '<br>' + ' ==> ' + result + '</br>';
-                        //document.querySelector('.stageframe').contentWindow.document.body.innerHTML = '<br>' + ' ==> ' + result + '</br>';
+                        document.querySelector('.stageframe').contentWindow.document.body.innerHTML = '<br>' + ' ==> ' + result + '</br>';
                     }
                 });
-            }
+            }*/
         }
         run();
     }
@@ -126,8 +85,8 @@
  
     function clearStage(event){
         wb.iframeReady = false;
-        //document.querySelector('.stageframe').contentWindow.document.body.innerHTML = '';
-	document.getElementsByTagName('iframe')[0].document.getElementById('display').innerHTML = '';
+        document.querySelector('.stageframe').contentWindow.document.body.innerHTML = '';
+	//document.getElementsByTagName('iframe')[0].document.getElementById('display').innerHTML = '';
     }
     wb.clearStage = clearStage;
 
