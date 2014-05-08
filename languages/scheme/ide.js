@@ -36,7 +36,8 @@
         var run = function(){
             wb.script = script;
             var scriptArray = script.split(";;end");
-	    frame.contentWindow.postMessage(scriptArray.join('\n'), "*");
+	    var message = scriptArray.join("\n");
+	    document.querySelector('.stageframe').contentWindow.postMessage(message, "*");
             //document.querySelector('.stageframe').contentWindow.document.body.innerHTML = "";
             /*for(var i = 0; i < scriptArray.length; i++) {
                 //console.log('THIS IS IMPORTANT:' + scriptArray[i]);
