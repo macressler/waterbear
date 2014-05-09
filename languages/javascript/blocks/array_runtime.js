@@ -27,7 +27,6 @@ function fastMean(arr){
     for(var i = 0; i < arr.length; i++){
         sum += arr[i];    
     }
-    //console.log("Mean= %d", sum/arr.length);
     return sum/arr.length;    
 }
 
@@ -40,7 +39,6 @@ function variance(arr){
     for(var i = 0; i < arr.length; i++){
         squares[i]= Math.pow((arr[i]-avg),2);    
     }
-    //console.log("Stdev= %d", Math.sqrt(fastMean(squares)));
     return fastMean(squares);
 }
 
@@ -110,7 +108,6 @@ function getNearestNeighbors(k, trainSet, testPoint) {
 //no weighting, just majority vote
 function kNN(k,trainSet,testPoint) {
     kClosest= getNearestNeighbors(k, trainSet, testPoint);
-    //majority vote, can be made more efficient
     kClosest.sort();
     mode= kClosest[0][0]; //guaranteed to exist (so no array bounds issue)
     modeFreq= 0;
@@ -129,7 +126,6 @@ function kNN(k,trainSet,testPoint) {
             currModeFreq= 1;
         }
     }
-    //alert("Your test point can be labeled as: " + mode);
     return mode;
 }
 
@@ -144,7 +140,6 @@ function weightedKNN(k,trainSet,testPoint) {
     currModeFreq= 0;
     for(var n=0; n<kClosest.length; n++) {
         if(kClosest[n][0] == currMode) {
-            //console.log(kClosest[n][1]);
             currModeFreq += 1/kClosest[n][1]; //when kClosest[n][1], currModeFreq= infinity
             if(currModeFreq > modeFreq) {
                 modeFreq= currModeFreq;
@@ -156,13 +151,10 @@ function weightedKNN(k,trainSet,testPoint) {
             currModeFreq= kClosest[n][1];
         }
     }
-    //alert("Your test point can be labeled as: " + mode);
     return mode;
 }
 
 
-//Possible issue: does this cover all possible control sequence issues?
-//Do all browsers handle all control sequences the same way?
 function stringEscape(s) {
     //not optimal design decision, but "escapes" contains length-3 arrays where:
     //1st entry is the escape character
@@ -174,7 +166,6 @@ function stringEscape(s) {
         ind = s.indexOf(escapes[i][0]);
         while (ind != -1) {
             s = s.replace(escapes[i][0], escapes[i][1]);
-            //console.log("Replacement process"+escapes[i][1]+": " + s);
             ind = s.substr(ind + 1).indexOf(escapes[i][0]);
         }
     }
@@ -189,9 +180,8 @@ function stringEscape(s) {
 }
 
 //Create number array from user-inputted CSV file
-//potential issue: use of "Number()" to convert string to number may be too
-//lenient, because Number() auto-converts variables of type "Date" to a number,
-//and there may be similar auto-conversions too. TBD if this is desired behavior
+//Note: Number() auto-converts variables of type "Date" to a number,
+//and there may be similar auto-conversions too. This might be desired behavior
 function createArrayFromCSV(file) {
     file= stringEscape(file);//want to replace backslashes so that they arent seen as escapes
     if(localStorage.getItem('__' + file) === null) {

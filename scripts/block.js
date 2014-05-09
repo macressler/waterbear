@@ -690,8 +690,8 @@
             return choice;
         
         }
-        //Known issue: width manually set to 160, need to programmatically get
-        //(size of "Browse" button) + (size of file input field). 
+        //Note: width manually set to 160, may want to programmatically set
+        //it to (size of "Browse" button) + (size of file input field) 
         if (type === 'file') {
             //var value = obj.uValue || obj.value || '';
             //not sure if 'value' or 'data-oldvalue' is needed in the below line
@@ -710,8 +710,8 @@
                     input.value= "";
                 }
             });
-            wb.resize(input); //not sure if this is necessary
-            input.style.width= "160px"; //known issue stated above
+            wb.resize(input); 
+            input.style.width= "160px"; //see note above
             return input;
         }
         if (type === 'int' || type === 'float'){
