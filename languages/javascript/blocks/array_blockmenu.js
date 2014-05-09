@@ -329,7 +329,7 @@
                     "type": "array"
                 },
                 {
-                    "name": "using kNN algorithm with k value",
+                    "name": "using kNN with k value",
                     "type": "number"
                 },
                 {
@@ -350,7 +350,7 @@
                     "type": "array"
                 },
                 {
-                    "name": "using weighted kNN algorithm with k value",
+                    "name": "using weighted kNN with k value",
                     "type": "number"
                 },
                 {

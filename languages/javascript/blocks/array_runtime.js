@@ -164,7 +164,7 @@ function weightedKNN(k,trainSet,testPoint) {
 //Possible issue: does this cover all possible control sequence issues?
 //Do all browsers handle all control sequences the same way?
 function stringEscape(s) {
-    //not optimal design decision, but "escapse" contains length-3 arrays where:
+    //not optimal design decision, but "escapes" contains length-3 arrays where:
     //1st entry is the escape character
     //2nd entry is the regex to be used in the replace function
     //3rd entry is the the replacement string
