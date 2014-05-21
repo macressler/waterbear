@@ -22,22 +22,27 @@ Things it would be nice to have for preso:
 * Processing wrapper
 * Libraries wrapping lo-dash and lo-dash string functions
 * Better games
-* High scores and multi-player (fancy friday?)
-* Collaboration via towtruck
 * Diff views
 * Slow down code running to watch state (and ability to watch state)
 * Drag to change values, toggle between number, slider, etc.
 * At least one full translation of blocks
-* Able to create a Web Component using Waterbear
 * Able to wire up components using Waterbear
 * Able to create or script an AppMaker component
 * Great docs for getting started, how to create and share projects, writing extensions
 * Parse JavasScript (including code blocks)
 * Fast expression entry (parsed into blocks)
-* Full WebMaker integration
+* Mozilla-specific integrations
+	* Full WebMaker integration through MakeAPI
+	* Open Badges
+	* Able to create a Web Component using Waterbear
+	* Signed version that can script FirefoxOS
+	* Signed version that can script Android
+	* Show how it fits into the Web Literacy Map
+	* High scores and multi-player (fancy friday?)
+	* Collaboration via towtruck
+	* Software Carpentry connection?
+	* Hive connection?
 * Run offline
-* Signed version that can script FirefoxOS
-* Signed version that can script Android
 * Open data integration
 * Themeable?
 * Show which code is modifying state
@@ -54,3 +59,5 @@ Why do we even need Waterbear if Scratch is doing so well? Scratch is intended f
 If you are not a native English speaker, you can code Waterbear in your native language. The blocks are translated, so you can share code between speakers of different languages. Try that with Java!
 
 [Demo: write an app that orders pizza with the push of a button].
+
+And preview the new TV show, Firefox and Friends, where the Firefox and Waterbear have adventures and teach how to solve big problems by breaking them down into smaller problems. Note that every episode is open content with all of the assets available for remixing with Popcorn Maker or Waterbear.
