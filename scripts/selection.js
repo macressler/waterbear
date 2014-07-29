@@ -13,6 +13,53 @@
      *   3. it is between the first selected block and the target block.
      */
     function select(target, multiselect) {
+        // Handle single selection
+        if (!multiselect) {
+            // Select the block if it is not selected
+            // Ignore the selection if it is already selected
+            if (selected.indexOf(target) == -1) {
+                deselectAllBlocks();
+                target.classList.add("selected");
+                selected.push(target);
+            }
+
+            return;
+        }
+
+        // Disable multiselect for blocks outside of the workspace
+        if (wb.closest(target, '.scripts_workspace') === null) { return; }
+
+        // Disable multiselect for blocks in the block menu
+        if (wb.matches(target.parentElement, '.block-menu')) { return; }
+
+        // Handle multiple selection
+        var nodes = wb.makeArray(selected[0].parentNode.children);
+        var firstIndex = nodes.indexOf(selected[0]);
+        var targetIndex = nodes.indexOf(target);
+
+        // Only select blocks if target block is on the same level
+        if (targetIndex > -1) {
+            // FIXME: Inefficient algorithm
+            deselectAllBlocks();
+
+            var step;
+
+            if (firstIndex < targetIndex) {
+                selectedInAscOrder = true;
+                step = 1;
+            } else {
+                selectedInAscOrder = false;
+                step = -1;
+            }
+
+            for (var i = firstIndex; i != targetIndex; i += step) {
+                nodes[i].classList.add("selected");
+                selected.push(nodes[i]);
+            }
+
+            target.classList.add("selected");
+            selected.push(target);
+        }
     }
 
     /**
