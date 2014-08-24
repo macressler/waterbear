@@ -1,65 +1,129 @@
-(function(){
+/*
+ *    ARDUINO PLUGIN
+ *
+ *    Support for writing Arduino using Waterbear
+ *
+ */
+(function(wb,Event){
+    // Add some utilities
+    'use strict';
 
-// This file depends on the runtime extensions, which should probably be moved into this namespace rather than made global
 
-// Remove stage menu item until menus get templatized
-var stageMenu = document.querySelector('[data-target=stage]').parentElement;
-stageMenu.parentElement.removeChild(stageMenu);
+    /* Wrap a script for execution in an iframe */
+    // Maybe this should all be moved to runtime?
+    wb.wrap = function(script){
+        return script;
+    };
 
-// expose these globally so the Block/Label methods can find them
-wb.choiceLists = {
-    boolean: ['true', 'false'],
-    highlow: ['HIGH', 'LOW'],
-    inoutput: ['INPUT', 'OUTPUT'],
-    onoff: ['ON', 'OFF'],
-    logic: ['true', 'false'],
-    digitalpins: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,'A0','A1','A2','A3','A4','A5'],
-    analoginpins: ['A0','A1','A2','A3','A4','A5'],
-    pwmpins: [3, 5, 6, 9, 10, 11],
-    baud:[9600, 300, 1200, 2400, 4800, 14400, 19200, 28800, 38400, 57600, 115200],
-    analogrefs:['DEFAULT', 'INTERNAL', 'INTERNAL1V1', 'INTERNAL2V56', 'EXTERNAL']
-};
-
-wb.setDefaultScript = function(script){
-    window.defaultscript = script;
-};
-
-wb.loadDefaultScript = function(script){
-    if (typeof window.defaultscript != 'undefined'){
-        loadScriptsFromObject(window.defaultscript);
+    // Where is this used? What is it for?
+    function assetUrls(){
+        return '[' + wb.findAll(document.body, '.workspace .block-menu .asset').map(function(asset){
+            // tricky and a bit hacky, since asset URLs aren't defined on asset blocks
+            var source = document.getElementById(asset.dataset.localSource);
+            return wb.getSocketValue(wb.block.sockets(source)[0]);
+        }).join(',') + ']';
     }
-};
 
-wb.writeScript = function(blocks, view){
-    var code = blocks.map(function(elem){
-        return wb.block.code(elem);
-    }).join('\n');
-    view.innerHTML = '<pre class="language-arduino">' + code + '</pre>';
-};
+    // Try to run the current script.
+    // Bail if there is no view to run it in (either preview pane or running full size)
+    // Bail if it is already running and hasn't changed
+    // Bail if
+    function runCurrentScripts(force){
+        force = force === true; // ignore stray values like event objects
+        
+        var blocks = wb.findAll(document.body, '.scripts_workspace');
 
-wb.runCurrentScripts = function(){ /* do nothing */ };
-wb.clearStage = function(){ /* do nothing */ };
+        for (var i=0; i < blocks.length; i++){
+            if (!wb.block.validate(blocks[i])){
+                console.warn('Not running script because of invalid block(s)');
+                return;
+            }
+        }
 
-
-wb.wrap = function(blocks){
+        document.body.classList.add('running');
+        if (wb.getState('scriptReady') && wb.getState('stageReady')){
+            console.log('ready to run script, let us proceed to the running of said script');
+        }else{
+            console.log('not ready to run script yet, waiting: scriptReady: %s, stageReady: %s', wb.getState('scriptReady'), wb.getState('stageReady'));
+            return;
+        }
         // update size of frame
-        return blocks.map(function(elem){
-          return wb.block.code(elem);
-        }).join('\n\n');
-};
+        wb.setState('isRunning', true);
+        wb.setState('scriptModified', false);
+        wb.runScript( wb.prettyScript(blocks) );
+    }
+    wb.runCurrentScripts = runCurrentScripts;
+
+    wb.runScript = function(script){
+        // console.log('script: %s', script);
+        var run = function(){
+            wb.script = script;
+        };
+        /*if (wb.getState('stageReady')){
+            // console.log('sending run to the iframe');
+            wb.setState('stageReady', false);
+            run();
+        }else{
+            // console.log('waiting for the stage to be ready before we run');
+            wb.iframewaiting = run;
+        }*/
+    };
+
+    function clearStage(event){
+    }
+    
+    wb.clearStage = clearStage;
+    Event.on('.clear-stage', 'click', null, clearStage);
+    Event.on('.edit-script', 'click', null, clearStage);
 
 
-function clearScriptsDefault(event, force){
-  clearScripts(event, force);
-  loadDefaultScript();
-}
 
-document.querySelector('.clear_scripts').addEventListener('click', clearScriptsDefault, false);
+    wb.prettyScript = function(elements){
+        return js_beautify(elements.map(function(elem){
+            return wb.block.code(elem);
+        }).join(''));
+    };
+
+    wb.writeScript = function(elements, view){
+        var code = elements.map(function(elem){
+            return wb.block.code(elem);
+        }).join('\n');
+        view.innerHTML = '<pre class="language-arduino">' + code + '</pre>';
+    };
+
+    // End UI section
+
+    // expose these globally so the Block/Label methods can find them
+    wb.choiceLists = {
+        boolean: ['true', 'false'],
+        highlow: ['HIGH', 'LOW'],
+        inoutput: ['INPUT', 'OUTPUT'],
+        onoff: ['ON', 'OFF'],
+        logic: ['true', 'false'],
+        digitalpins: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,'A0','A1','A2','A3','A4','A5'],
+        analoginpins: ['A0','A1','A2','A3','A4','A5'],
+        pwmpins: [3, 5, 6, 9, 10, 11],
+        baud:[9600, 300, 1200, 2400, 4800, 14400, 19200, 28800, 38400, 57600, 115200],
+        analogrefs:['DEFAULT', 'INTERNAL', 'INTERNAL1V1', 'INTERNAL2V56', 'EXTERNAL']
+    };
+
+    // Hints for building blocks
+    //
+    //
+    // Expression blocks can nest, so don't end their scripts with semi-colons (i.e., if there is a "type" specified).
+    //
+    //
+
+    // Temporarily disable these until I can get time to implement them properly
+    // wb.menu('Recent Blocks', []);
+    // wb.menu('Favourite Blocks', []);
 
 
 
-var defaultscript=[{"klass":"control","label":"Global Settings","script":"/*Global Settings*/\u000a\u000a[[next]]\u000a\u000a","containers":0,"trigger":true,"sockets":[],"contained":[],"next":""},{"klass":"control","label":"Setup - When program starts","script":"void setup()\u000a{\u000a[[next]]\u000a}\u000a","containers":0,"trigger":true,"sockets":[],"contained":[],"next":""},{"klass":"control","label":"Main loop","script":"void loop()\u000a{\u000a[[1]]\u000a}\u000a","containers":1,"trigger":true,"sockets":[],"contained":[""],"next":""}];
-wb.setDefaultScript(defaultscript);
+    Event.on('.socket input', 'click', null, function(event){
+        event.target.focus();
+        event.target.select();
+    });
 
+})(wb, Event);
 
-})();

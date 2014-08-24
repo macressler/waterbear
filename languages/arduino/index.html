@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="../../stylesheets/blocks.css" >
 <link rel="stylesheet" href="../../stylesheets/menu.css" >
 <link rel="stylesheet" href="../../stylesheets/fonts/font-awesome/css/font-awesome.min.css" >
+<link rel="stylesheet" href="../../stylesheets/highlight-github.css" >
 <link rel="stylesheet" href="arduino.css" >
-
 <link rel="stylesheet" href="blocks/boolean.css" >
 <link rel="stylesheet" href="blocks/control.css" >
 <link rel="stylesheet" href="blocks/digitalio.css" >
@@ -124,10 +124,9 @@
             <li class="escape">
                 <button class="escape-embed">Open in Waterbear</button>
             </li>
-            <li><button class="fa fa-play run-script">Run</button></li>
-<li><button class="fa fa-stop stop-script">Stop</button></li>
-<li><button class="fa fa-check-square-o autorun-script-on">Autorun</button></li>
-<li><button class="fa fa-square-o autorun-script-off">Autorun</button></li>
+            <li><button class="fa fa-play run-script stage-control">Run</button></li>
+<li><button class="fa fa-stop stop-script stage-control">Stop</button></li>
+<li><button class="toggle stage-control" data-target="autorun">Autorun</button></li>
 
         </ul>
     </nav>
@@ -158,7 +157,21 @@
         <div class="workspace">
             <div class="scratchpad hidden">Scratch space, drag blocks here to re-use</div>
         </div>
-        <div class="result">
+        <script>
+    function receiveMessage(event){
+        if (event.data === 'ide-ready'){
+            Event.trigger(document.body, 'wb-initialize', {component: 'stage'});
+        }else if (event.data === 'ide-paused'){
+            wb.setState('stageReady', false);
+            // Event.once(document.body, 'wb-ready', null, wb.onReady);
+        }
+    }
+	window.addEventListener('message', receiveMessage, false);
+</script>
+<div class="result">
+	<div class="remote">
+        <div class="messagebox"></div>
+    </div>
 	<div class="scripts_text_view"></div>
 </div>
 
@@ -169,6 +182,8 @@
     </div>
     <svg class="sekrit-svg"><text class="resize-tester"></text></svg>
     <script src="../../lib/ajax.js"></script>
+<script src="../../lib/beautify.js"></script>
+<script src="../../lib/highlight.js"></script>
 <script src="../../lib/events.min.js"></script>
 <script src="../../scripts/wb.js"></script>
 <script src="../../scripts/queryparams.js"></script>
@@ -188,15 +203,13 @@
 <script src="../../scripts/ui.js"></script>
 <script src="../../scripts/menu.js"></script>
 <script src="ide.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="blocks/boolean_ide.js"></script>
+<script src="blocks/control_ide.js"></script>
+<script src="blocks/digitalio_ide.js"></script>
+<script src="blocks/math_ide.js"></script>
+<script src="blocks/serialio_ide.js"></script>
+<script src="blocks/timing_ide.js"></script>
+<script src="blocks/variables_ide.js"></script>
 <script src="blocks/boolean_blockmenu.js"></script>
 <script src="blocks/control_blockmenu.js"></script>
 <script src="blocks/digitalio_blockmenu.js"></script>
