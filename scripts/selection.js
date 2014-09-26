@@ -1,4 +1,4 @@
-(function(wb){
+(function(wb) {
     var selected = [];
     var ascending = false;
 
@@ -19,9 +19,11 @@
             // Ignore the selection if it is already selected
             if (selected.indexOf(target) == -1) {
                 deselectAllBlocks();
-                target.classList.add("selected");
+                target.classList.add('selected');
                 selected.push(target);
             }
+
+            Event.trigger(target, 'wb-select');
 
             return;
         }
@@ -39,26 +41,23 @@
 
         // Only select blocks if target block is on the same level
         if (targetIndex > -1) {
-            // FIXME: Inefficient algorithm
             deselectAllBlocks();
 
             var step;
 
             if (firstIndex < targetIndex) {
-                selectedInAscOrder = true;
+                ascending = true;
                 step = 1;
             } else {
-                selectedInAscOrder = false;
+                ascending = false;
                 step = -1;
             }
 
-            for (var i = firstIndex; i != targetIndex; i += step) {
-                nodes[i].classList.add("selected");
+            for (var i = firstIndex; i != targetIndex + step; i += step) {
+                nodes[i].classList.add('selected');
                 selected.push(nodes[i]);
+                Event.trigger(nodes[i], 'wb-select');
             }
-
-            target.classList.add("selected");
-            selected.push(target);
         }
     }
 
@@ -67,7 +66,9 @@
      */
     function deselectAll() {
         while (selected.length > 0) {
-            selected.pop().classList.remove("selected");
+            var node = selected.pop();
+            node.classList.remove('selected');
+            Event.trigger(node, 'wb-deselect');
         }
     }
 
